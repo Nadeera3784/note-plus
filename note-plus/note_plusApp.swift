@@ -2,7 +2,7 @@
 //  note_plusApp.swift
 //  note-plus
 //
-//  Created by Nadeera Sampath on 2023-07-09.
+//  Created by Nadeera Sampath on 2023-07-16.
 //
 
 import SwiftUI
@@ -15,3 +15,4 @@ struct note_plusApp: App {
         }
     }
 }
+
