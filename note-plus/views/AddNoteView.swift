@@ -74,7 +74,6 @@ struct AddNoteView: View {
                     .background(Color.black)
                     .cornerRadius(10)
                     .disabled(!isValid)
-                    
                     Button(action: cancel) {
                         Text("Cancel")
                     }

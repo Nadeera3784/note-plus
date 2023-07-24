@@ -12,14 +12,11 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if noteStore.notes.isEmpty {
-                Image("sad-face")
+                Image("no-notes")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding()
                     .foregroundColor(.gray)
-                Text("Create a new note")
-                    .padding()
-                    .font(.headline)
             } else {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
@@ -56,14 +53,15 @@ struct ContentView: View {
                     }
                 }
             }
-            
+
             Button(action: { isAddingNote = true }) {
                 Image(systemName: "plus.circle.fill")
             }
-            .background(Color.secondary.opacity(0.1))
+            .background(Color.clear)
             .cornerRadius(10)
             .foregroundColor(.black)
-            .font(.system(size: 32))
+            .font(.system(size: 50))
+            .frame(maxHeight: .infinity, alignment: .bottom)
             
             Spacer()
         }
@@ -103,9 +101,11 @@ struct ContentView: View {
     }
     
     func deleteNote(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let note = noteStore.notes[index]
-            noteStore.deleteNote(note)
+        withAnimation(.easeOut(duration: 0.3)) {
+            offsets.forEach { index in
+                let note = noteStore.notes[index]
+                noteStore.deleteNote(note)
+            }
         }
     }
 }

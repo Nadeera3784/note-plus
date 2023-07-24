@@ -34,8 +34,6 @@ struct NoteDetailsView: View {
             }
             
             HStack{
-                Spacer()
-                
                 Button(action: cancel) {
                     Text("Cancel")
                         .padding()
@@ -44,9 +42,7 @@ struct NoteDetailsView: View {
                         .background(Color("SecondaryBackgroundColor"))
                         .cornerRadius(10)
                 }
-                
-                .padding(.horizontal)
-                .padding(.bottom, 20)
+                .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
