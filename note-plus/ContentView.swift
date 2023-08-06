@@ -10,13 +10,14 @@ struct ContentView: View {
     @State private var selectedNote: Note? = nil
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .top) {
             if noteStore.notes.isEmpty {
                 Image("no-notes")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding()
                     .foregroundColor(.gray)
+                    .alignmentGuide(.top, computeValue: { d in d[.top] })
             } else {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
@@ -53,17 +54,17 @@ struct ContentView: View {
                     }
                 }
             }
-
-            Button(action: { isAddingNote = true }) {
-                Image(systemName: "plus.circle.fill")
+            HStack{
+                Button(action: { isAddingNote = true }) {
+                    Image(systemName: "plus.circle.fill")
+                }
+                .background(Color.clear)
+                .cornerRadius(10)
+                .foregroundColor(.black)
+                .font(.system(size: 50))
+                .frame(maxHeight: .infinity, alignment: .bottom)
             }
-            .background(Color.clear)
-            .cornerRadius(10)
-            .foregroundColor(.black)
-            .font(.system(size: 50))
-            .frame(maxHeight: .infinity, alignment: .bottom)
             
-            Spacer()
         }
         .navigationTitle("Notes")
         .sheet(isPresented: $isAddingNote, content: {
